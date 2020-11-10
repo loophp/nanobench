@@ -9,49 +9,44 @@ use Exception;
 abstract class AbstractTime implements TimeInterface
 {
     /**
-     * @var float
-     */
-    protected $time;
-
-    /**
      * @var string
      */
     protected $unit;
 
-    protected function convertTo(string $unit): float
+    protected function convertTo(float $time, string $unit): float
     {
         // Convert to seconds.
         switch ($this->unit) {
             case TimeUnit::NANOSECOND:
-                $time = $this->time / 10 ** 9;
+                $time = $time / 10 ** 9;
 
                 break;
             case TimeUnit::MICROSECOND:
-                $time = $this->time / 10 ** 6;
+                $time = $time / 10 ** 6;
 
                 break;
             case TimeUnit::MILLISECOND:
-                $time = $this->time / 10 ** 3;
+                $time = $time / 10 ** 3;
 
                 break;
             case TimeUnit::SECOND:
-                $time = $this->time;
+                $time = $time;
 
                 break;
             case TimeUnit::MINUTE:
-                $time = $this->time * 60;
+                $time = $time * 60;
 
                 break;
             case TimeUnit::HOUR:
-                $time = $this->time * 60 * 60;
+                $time = $time * 60 * 60;
 
                 break;
             case TimeUnit::DAY:
-                $time = $this->time * 60 * 60 * 24;
+                $time = $time * 60 * 60 * 24;
 
                 break;
             case TimeUnit::WEEK:
-                $time = $this->time * 60 * 60 * 24 * 7;
+                $time = $time * 60 * 60 * 24 * 7;
 
                 break;
         }

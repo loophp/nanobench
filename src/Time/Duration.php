@@ -6,8 +6,14 @@ namespace loophp\nanobench\Time;
 
 final class Duration extends AbstractTime
 {
+    /**
+     * @var TimeInterface
+     */
     private $from;
 
+    /**
+     * @var TimeInterface
+     */
     private $to;
 
     public function __construct(TimeInterface $from, TimeInterface $to, string $unit = TimeUnit::SECOND)

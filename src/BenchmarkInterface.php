@@ -11,6 +11,9 @@ interface BenchmarkInterface
 {
     public function getDuration(): TimeInterface;
 
+    /**
+     * @return mixed
+     */
     public function getReturn();
 
     public function getStopwatch(): StopwatchInterface;

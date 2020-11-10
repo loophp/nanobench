@@ -31,11 +31,16 @@ final class Stopwatch implements StopwatchInterface
         $this->events = [[$time, 'construct']];
     }
 
-    public function checkpoint($name = null): self
+    /**
+     * @psalm-param mixed $id
+     *
+     * @param mixed|null $id
+     */
+    public function checkpoint($id = null): StopwatchInterface
     {
         $time = $this->clock->time();
 
-        if (true === in_array($name, ['start', 'construct', 'stop'], true)) {
+        if (true === in_array($id, ['start', 'construct', 'stop'], true)) {
             throw new InvalidArgumentException('Invalid checkpoint id.');
         }
 
@@ -47,7 +52,7 @@ final class Stopwatch implements StopwatchInterface
             throw new LogicException('Cannot add a checkpoint in a stopped stopwatch.');
         }
 
-        $this->events[] = [$time, $name];
+        $this->events[] = [$time, $id];
 
         return $this;
     }
@@ -71,19 +76,32 @@ final class Stopwatch implements StopwatchInterface
         return end($diffs);
     }
 
+    /**
+     * @psalm-param mixed $from
+     * @psalm-param mixed $to
+     *
+     * @param mixed $from
+     * @param mixed $to
+     */
     public function getDiffFromTo($from, $to): TimeInterface
     {
         $events = array_filter(
             $this->getEvents(),
-            static fn (array $event): bool => in_array($event[1], [$from, $to], true)
+            static function (array $event) use ($from, $to): bool {
+                return in_array($event[1], [$from, $to], true);
+            }
         );
 
         if (2 !== count($events)) {
             throw new InvalidArgumentException('Unable to find the events.');
         }
 
-        $fromKey = $this->arrayFind($events, static fn (array $event): bool => $event[1] === $from);
-        $toKey = $this->arrayFind($events, static fn (array $event): bool => $event[1] === $to);
+        $fromKey = $this->arrayFind($events, static function (array $event) use ($from): bool {
+            return $event[1] === $from;
+        });
+        $toKey = $this->arrayFind($events, static function (array $event) use ($to): bool {
+            return $event[1] === $to;
+        });
 
         return new Duration($events[$fromKey][0], $events[$toKey][0]);
     }
@@ -94,7 +112,12 @@ final class Stopwatch implements StopwatchInterface
         // Remove created event.
         array_shift($events);
 
-        $events = array_map(static fn (array $event): TimeInterface => $event[0], $events);
+        $events = array_map(
+            static function (array $event): TimeInterface {
+                return $event[0];
+            },
+            $events
+        );
 
         $first = array_shift($events);
 
@@ -126,6 +149,11 @@ final class Stopwatch implements StopwatchInterface
         );
     }
 
+    /**
+     * @psalm-param mixed $id
+     *
+     * @param mixed $id
+     */
     public function getEvent($id): array
     {
         $events = $this->getEvents();
@@ -196,14 +224,14 @@ final class Stopwatch implements StopwatchInterface
             );
     }
 
-    public function reset(): self
+    public function reset(): StopwatchInterface
     {
         $this->events = [array_shift($this->events)];
 
         return $this;
     }
 
-    public function start(): self
+    public function start(): StopwatchInterface
     {
         $time = $this->clock->time();
 

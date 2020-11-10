@@ -6,8 +6,15 @@ namespace loophp\nanobench\Time;
 
 interface StopwatchInterface
 {
-    public function checkpoint($name = null): self;
+    /**
+     * @param mixed $id
+     */
+    public function checkpoint($id = null): StopwatchInterface;
 
+    /**
+     * @param mixed $from
+     * @param mixed $to
+     */
     public function getDiffFromTo($from, $to): TimeInterface;
 
     public function getElapsed(): TimeInterface;
@@ -16,9 +23,9 @@ interface StopwatchInterface
 
     public function isStopped(): bool;
 
-    public function reset(): self;
+    public function reset(): StopwatchInterface;
 
-    public function start(): self;
+    public function start(): StopwatchInterface;
 
     public function stop(): void;
 }

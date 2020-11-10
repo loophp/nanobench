@@ -6,6 +6,11 @@ namespace loophp\nanobench\Time;
 
 final class Time extends AbstractTime
 {
+    /**
+     * @var float
+     */
+    protected $time;
+
     public function __construct(float $time, string $unit = TimeUnit::SECOND)
     {
         $this->time = $time;
@@ -14,46 +19,46 @@ final class Time extends AbstractTime
 
     public function as(string $timeUnit): float
     {
-        return $this->convertTo($timeUnit);
+        return $this->convertTo($this->time, $timeUnit);
     }
 
     public function asDay(): float
     {
-        return $this->convertTo(TimeUnit::DAY);
+        return $this->convertTo($this->time, TimeUnit::DAY);
     }
 
     public function asHour(): float
     {
-        return $this->convertTo(TimeUnit::HOUR);
+        return $this->convertTo($this->time, TimeUnit::HOUR);
     }
 
     public function asMicrosecond(): float
     {
-        return $this->convertTo(TimeUnit::MICROSECOND);
+        return $this->convertTo($this->time, TimeUnit::MICROSECOND);
     }
 
     public function asMillisecond(): float
     {
-        return $this->convertTo(TimeUnit::MILLISECOND);
+        return $this->convertTo($this->time, TimeUnit::MILLISECOND);
     }
 
     public function asMinute(): float
     {
-        return $this->convertTo(TimeUnit::MINUTE);
+        return $this->convertTo($this->time, TimeUnit::MINUTE);
     }
 
     public function asNanosecond(): float
     {
-        return $this->convertTo(TimeUnit::NANOSECOND);
+        return $this->convertTo($this->time, TimeUnit::NANOSECOND);
     }
 
     public function asSecond(): float
     {
-        return $this->convertTo(TimeUnit::SECOND);
+        return $this->convertTo($this->time, TimeUnit::SECOND);
     }
 
     public function asWeek(): float
     {
-        return $this->convertTo(TimeUnit::WEEK);
+        return $this->convertTo($this->time, TimeUnit::WEEK);
     }
 }
