@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace loophp\nanobench;
 
 use Closure;
+use Generator;
 use loophp\nanobench\Time\StopwatchInterface;
 use loophp\nanobench\Time\TimeInterface;
 
@@ -68,10 +69,17 @@ final class Benchmark implements BenchmarkInterface
 
     public function run(): BenchmarkInterface
     {
-        $this->stopwatch->start();
-        $this->return = ($this->closure)(...$this->arguments);
-        $this->stopwatch->stop();
+        iterator_to_array($this->benchRunner());
 
         return $this;
+    }
+
+    private function benchRunner(): Generator
+    {
+        yield $this->stopwatch->start();
+
+        yield $this->return = ($this->closure)(...$this->arguments);
+
+        yield $this->stopwatch->stop();
     }
 }
