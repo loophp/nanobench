@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
+  <file src="src/BenchmarkFactory.php">
+    <MissingParamType occurrences="2">
+      <code>$arguments</code>
+      <code>$arguments</code>
+    </MissingParamType>
+  </file>
+  <file src="src/BenchmarkFactoryInterface.php">
+    <MissingParamType occurrences="2">
+      <code>$arguments</code>
+      <code>$arguments</code>
+    </MissingParamType>
+  </file>
+  <file src="src/Time/Stopwatch.php">
+    <PossiblyNullArrayOffset occurrences="2">
+      <code>$events</code>
+      <code>$events</code>
+    </PossiblyNullArrayOffset>
+  </file>
+</files>

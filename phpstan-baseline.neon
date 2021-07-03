@@ -1,0 +1,67 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method loophp\\\\nanobench\\\\Benchmark\\:\\:benchRunner\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			count: 1
+			path: src/Benchmark.php
+
+		-
+			message: "#^Result of method loophp\\\\nanobench\\\\Time\\\\StopwatchInterface\\:\\:stop\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: src/Benchmark.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactory\\:\\:fromCallable\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			count: 1
+			path: src/BenchmarkFactory.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactory\\:\\:fromClosure\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			count: 1
+			path: src/BenchmarkFactory.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactoryInterface\\:\\:fromCallable\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			count: 1
+			path: src/BenchmarkFactoryInterface.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactoryInterface\\:\\:fromClosure\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			count: 1
+			path: src/BenchmarkFactoryInterface.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:arrayFind\\(\\) has parameter \\$xs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:getAll\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:getDiffs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:getEvent\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+
+		-
+			message: "#^Method loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:getEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+
+		-
+			message: "#^Parameter \\#1 \\$from of class loophp\\\\nanobench\\\\Time\\\\Duration constructor expects loophp\\\\nanobench\\\\Time\\\\TimeInterface, loophp\\\\nanobench\\\\Time\\\\TimeInterface\\|null given\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+
+		-
+			message: "#^Property loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:\\$events type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
+

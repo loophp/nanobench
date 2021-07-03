@@ -13,16 +13,15 @@
         }
     ],
     "require": {
-        "php": ">= 7.3"
+        "php": ">= 7.4"
     },
     "require-dev": {
-        "drupol/php-conventions": "^2.0.3",
+        "drupol/php-conventions": "^5",
         "friends-of-phpspec/phpspec-code-coverage": "^5",
-        "infection/infection": "^0.18",
+        "infection/infection": "^0.23",
         "infection/phpspec-adapter": "^0.1.1",
         "phpspec/phpspec": "^7",
-        "phpstan/phpstan-strict-rules": "^0.12",
-        "vimeo/psalm": "^4.1.0"
+        "phpstan/phpstan-strict-rules": "^0.12"
     },
     "config": {
         "sort-packages": true
