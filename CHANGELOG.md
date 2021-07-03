@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0](https://github.com/loophp/nanobench/compare/1.0.1...1.1.0)
+## [1.1.1](https://github.com/loophp/nanobench/compare/1.1.0...1.1.1)
+
+### Commits
+
+- ci: Update Github CI configuration. [`8031a75`](https://github.com/loophp/nanobench/commit/8031a757655bae7fff46edc36301631194f9be85)
+- chore: Update static files. [`4720cec`](https://github.com/loophp/nanobench/commit/4720cec107347dc3ffbdf11bbc39b9d3bfc00258)
+- chore: Update Grumphp configuration. [`eada025`](https://github.com/loophp/nanobench/commit/eada0257f2e6ad24577385c2cb89b2882cbdc657)
+
+## [1.1.0](https://github.com/loophp/nanobench/compare/1.0.1...1.1.0) - 2021-07-03
 
 ### Merged
 
@@ -19,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
+- docs: Add/update CHANGELOG. [`2a9bc41`](https://github.com/loophp/nanobench/commit/2a9bc41f57b0bf4f1ce71a1c856a0556d50a8cf1)
 - chore: Update various static files. [`166fdbb`](https://github.com/loophp/nanobench/commit/166fdbbdf255f750b03649b74c7f50fead9960df)
 - chore: Add Docker stack. [`1d26944`](https://github.com/loophp/nanobench/commit/1d26944b4ce1e2db79f1efd09ef15256d6502763)
 - refactor: Autofix code style. [`3753b03`](https://github.com/loophp/nanobench/commit/3753b0303ccb2110866090c6b1523e525accfc35)
