@@ -20,7 +20,7 @@
         "friends-of-phpspec/phpspec-code-coverage": "^5",
         "infection/infection": "^0.23",
         "infection/phpspec-adapter": "^0.1.1",
-        "phpspec/phpspec": "^7",
+        "phpspec/phpspec": "^7.1",
         "phpstan/phpstan-strict-rules": "^0.12"
     },
     "config": {
@@ -30,5 +30,28 @@
         "psr-4": {
             "loophp\\nanobench\\": "src/"
         }
-    }
+    },
+    "scripts": {
+        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
+        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
+        "grumphp": "./vendor/bin/grumphp run",
+        "infection": "vendor/bin/infection run -j 2",
+        "phpspec": "vendor/bin/phpspec run -vvv --stop-on-failure"
+    },
+    "support": {
+        "issues": "https://github.com/loophp/nanobench/issues",
+        "source": "https://github.com/loophp/nanobench",
+        "docs": "https://github.com/loophp/nanobench"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/drupol"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.me/drupol"
+        }
+    ]
+
 }
