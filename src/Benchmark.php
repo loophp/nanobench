@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\nanobench;
@@ -15,16 +20,14 @@ use loophp\nanobench\Time\TimeInterface;
 final class Benchmark implements BenchmarkInterface
 {
     /**
-     * @var array
      * @psalm-var list<T>
      */
-    private $arguments;
+    private array $arguments;
 
     /**
-     * @var Closure
      * @psalm-var Closure(T...): T
      */
-    private $closure;
+    private Closure $closure;
 
     /**
      * @var mixed|null
@@ -32,10 +35,7 @@ final class Benchmark implements BenchmarkInterface
      */
     private $return;
 
-    /**
-     * @var StopwatchInterface
-     */
-    private $stopwatch;
+    private StopwatchInterface $stopwatch;
 
     /**
      * @psalm-param Closure(T...): T $closure
@@ -69,7 +69,9 @@ final class Benchmark implements BenchmarkInterface
 
     public function run(): BenchmarkInterface
     {
-        iterator_to_array($this->benchRunner());
+        [,$return,] = iterator_to_array($this->benchRunner());
+
+        $this->return = $return;
 
         return $this;
     }
@@ -78,7 +80,7 @@ final class Benchmark implements BenchmarkInterface
     {
         yield $this->stopwatch->start();
 
-        yield $this->return = ($this->closure)(...$this->arguments);
+        yield ($this->closure)(...$this->arguments);
 
         yield $this->stopwatch->stop();
     }

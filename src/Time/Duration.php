@@ -1,20 +1,19 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\nanobench\Time;
 
 final class Duration extends AbstractTime
 {
-    /**
-     * @var TimeInterface
-     */
-    private $from;
+    private TimeInterface $from;
 
-    /**
-     * @var TimeInterface
-     */
-    private $to;
+    private TimeInterface $to;
 
     public function __construct(TimeInterface $from, TimeInterface $to, string $unit = TimeUnit::SECOND)
     {

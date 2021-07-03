@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\nanobench\Time;
@@ -12,15 +17,9 @@ use function in_array;
 
 final class Stopwatch implements StopwatchInterface
 {
-    /**
-     * @var ClockInterface
-     */
-    private $clock;
+    private ClockInterface $clock;
 
-    /**
-     * @var array
-     */
-    private $events;
+    private array $events;
 
     public function __construct(ClockInterface $clock)
     {

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\nanobench;
@@ -15,8 +20,6 @@ final class StopwatchFactory implements StopwatchFactoryInterface
 {
     public function new(): StopwatchInterface
     {
-        $clock = PHP_VERSION_ID >= 70300 ? new HrClock() : new Clock();
-
-        return new Stopwatch($clock);
+        return new Stopwatch(PHP_VERSION_ID >= 70300 ? new HrClock() : new Clock());
     }
 }
