@@ -5,10 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.1](https://github.com/loophp/nanobench/compare/1.1.0...1.1.1)
+## [Unreleased](https://github.com/loophp/nanobench/compare/1.1.1...HEAD)
 
 ### Commits
 
+- chore: Add Scrutinizer config file. [`6ebf8d1`](https://github.com/loophp/nanobench/commit/6ebf8d1ad51d953f9bbc8df66eafadba6ac9a2a8)
+
+## [1.1.1](https://github.com/loophp/nanobench/compare/1.1.0...1.1.1) - 2021-07-03
+
+### Commits
+
+- docs: Add/update CHANGELOG. [`7357963`](https://github.com/loophp/nanobench/commit/73579633d5e6f92f22c5144667f201f9facf05eb)
 - ci: Update Github CI configuration. [`8031a75`](https://github.com/loophp/nanobench/commit/8031a757655bae7fff46edc36301631194f9be85)
 - chore: Update static files. [`4720cec`](https://github.com/loophp/nanobench/commit/4720cec107347dc3ffbdf11bbc39b9d3bfc00258)
 - chore: Update Grumphp configuration. [`eada025`](https://github.com/loophp/nanobench/commit/eada0257f2e6ad24577385c2cb89b2882cbdc657)
