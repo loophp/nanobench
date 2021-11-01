@@ -21,7 +21,7 @@
         "infection/infection": "^0.23 || ^0.24",
         "infection/phpspec-adapter": "^0.1.1",
         "phpspec/phpspec": "^7.1",
-        "phpstan/phpstan-strict-rules": "^0.12"
+        "phpstan/phpstan-strict-rules": "^0.12 || ^1.0"
     },
     "config": {
         "sort-packages": true
