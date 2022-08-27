@@ -1,7 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method loophp\\\\nanobench\\\\Benchmark\\:\\:benchRunner\\(\\) return type has no value type specified in iterable type Generator\\.$#"
+			message: "#^Property loophp\\\\nanobench\\\\Benchmark\\<T\\>\\:\\:\\$arguments \\(array\\<int, T\\>\\) does not accept array\\<int\\|string, T\\>\\.$#"
+			count: 1
+			path: src/Benchmark.php
+
+		-
+			message: "#^Property loophp\\\\nanobench\\\\Benchmark\\<T\\>\\:\\:\\$return \\(T\\|null\\) does not accept mixed\\.$#"
 			count: 1
 			path: src/Benchmark.php
 
@@ -11,22 +16,22 @@ parameters:
 			path: src/Benchmark.php
 
 		-
-			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactory\\:\\:fromCallable\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactory\\:\\:fromCallable\\(\\) has parameter \\$arguments with no type specified\\.$#"
 			count: 1
 			path: src/BenchmarkFactory.php
 
 		-
-			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactory\\:\\:fromClosure\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactory\\:\\:fromClosure\\(\\) has parameter \\$arguments with no type specified\\.$#"
 			count: 1
 			path: src/BenchmarkFactory.php
 
 		-
-			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactoryInterface\\:\\:fromCallable\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactoryInterface\\:\\:fromCallable\\(\\) has parameter \\$arguments with no type specified\\.$#"
 			count: 1
 			path: src/BenchmarkFactoryInterface.php
 
 		-
-			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactoryInterface\\:\\:fromClosure\\(\\) has parameter \\$arguments with no typehint specified\\.$#"
+			message: "#^Method loophp\\\\nanobench\\\\BenchmarkFactoryInterface\\:\\:fromClosure\\(\\) has parameter \\$arguments with no type specified\\.$#"
 			count: 1
 			path: src/BenchmarkFactoryInterface.php
 
@@ -61,7 +66,11 @@ parameters:
 			path: src/Time/Stopwatch.php
 
 		-
-			message: "#^Property loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:\\$events type has no value type specified in iterable type array\\.$#"
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
 			count: 1
 			path: src/Time/Stopwatch.php
 
+		-
+			message: "#^Property loophp\\\\nanobench\\\\Time\\\\Stopwatch\\:\\:\\$events type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Time/Stopwatch.php
