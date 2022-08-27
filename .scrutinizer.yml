@@ -17,7 +17,7 @@ build:
 
 filter:
     paths:
-        - 'src/*'
+        - "src/*"
 
 tools:
     external_code_coverage:
