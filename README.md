@@ -5,8 +5,7 @@
 [![Scrutinizer code quality][code quality]][code quality link]
 [![Type Coverage][type coverage]][sheperd type coverage]
 [![Code Coverage][code coverage]][code quality link]
-[![License][license]][packagist]
-[![Donate!][donate github]][github sponsor]
+[![License][license]][packagist] [![Donate!][donate github]][github sponsor]
 [![Donate!][donate paypal]][paypal sponsor]
 
 # PHP Nanobench
@@ -53,21 +52,22 @@ $benchmark->getReturn(); // Return value of the callable that has been benchmark
 
 ### API
 
-The API is quite light and completely described in the [Benchmark interface][benchmark interface].
+The API is quite light and completely described in the [Benchmark
+interface][benchmark interface].
 
 ## Code quality, tests and benchmarks
 
-Every time changes are introduced into the library, [Github][github actions] run the
-tests.
+Every time changes are introduced into the library, [Github][github actions] run
+the tests.
 
-The library has tests written with [PHPSpec][phpspec].
-Feel free to check them out in the `spec` directory. Run `composer phpspec` to trigger the tests.
+The library has tests written with [PHPSpec][phpspec]. Feel free to check them
+out in the `spec` directory. Run `composer phpspec` to trigger the tests.
 
-Before each commit some inspections are executed with [GrumPHP][grumphp],
-run `composer grumphp` to check manually.
+Before each commit some inspections are executed with [GrumPHP][grumphp], run
+`composer grumphp` to check manually.
 
-The quality of the tests is tested with [Infection][infection] a PHP Mutation testing
-framework, run `composer infection` to try it.
+The quality of the tests is tested with [Infection][infection] a PHP Mutation
+testing framework, run `composer infection` to try it.
 
 Static analysers are also controlling the code. [PHPStan][phpstan] and
 [PSalm][psalm] are enabled to their maximum level.
@@ -76,30 +76,44 @@ Static analysers are also controlling the code. [PHPStan][phpstan] and
 
 Feel free to contribute by sending Github pull requests. I'm quite reactive :-)
 
-If you can't contribute to the code, you can also sponsor me on [Github][github sponsor] or [Paypal][paypal sponsor].
+If you can't contribute to the code, you can also sponsor me on
+[Github][github sponsor] or [Paypal][paypal sponsor].
 
 ## Changelog
 
-See [CHANGELOG.md][changelog-md] for a changelog based on [git commits][git-commits].
+See [CHANGELOG.md][changelog-md] for a changelog based on [git
+commits][git-commits].
 
-For more detailed changelogs, please check [the release changelogs][changelog-releases].
+For more detailed changelogs, please check [the release
+changelogs][changelog-releases].
 
-[latest stable version]: https://img.shields.io/packagist/v/loophp/nanobench.svg?style=flat-square
+[latest stable version]:
+  https://img.shields.io/packagist/v/loophp/nanobench.svg?style=flat-square
 [packagist]: https://packagist.org/packages/loophp/nanobench
-[github stars]: https://img.shields.io/github/stars/loophp/nanobench.svg?style=flat-square
-[total downloads]: https://img.shields.io/packagist/dt/loophp/nanobench.svg?style=flat-square
-[github workflow status]: https://img.shields.io/github/workflow/status/loophp/nanobench/Continuous%20Integration?style=flat-square
+[github stars]:
+  https://img.shields.io/github/stars/loophp/nanobench.svg?style=flat-square
+[total downloads]:
+  https://img.shields.io/packagist/dt/loophp/nanobench.svg?style=flat-square
+[github workflow status]:
+  https://img.shields.io/github/workflow/status/loophp/nanobench/Continuous%20Integration?style=flat-square
 [github actions]: https://github.com/loophp/nanobench/actions
-[code quality]: https://img.shields.io/scrutinizer/quality/g/loophp/nanobench/master.svg?style=flat-square
-[code quality link]: https://scrutinizer-ci.com/g/loophp/nanobench/?branch=master
+[code quality]:
+  https://img.shields.io/scrutinizer/quality/g/loophp/nanobench/master.svg?style=flat-square
+[code quality link]:
+  https://scrutinizer-ci.com/g/loophp/nanobench/?branch=master
 [type coverage]: https://shepherd.dev/github/loophp/nanobench/coverage.svg
 [sheperd type coverage]: https://shepherd.dev/github/loophp/nanobench
-[code coverage]: https://img.shields.io/scrutinizer/coverage/g/loophp/nanobench/master.svg?style=flat-square
-[code quality link]: https://img.shields.io/scrutinizer/quality/g/loophp/nanobench/master.svg?style=flat-square
-[license]: https://img.shields.io/packagist/l/loophp/nanobench.svg?style=flat-square
-[donate github]: https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
+[code coverage]:
+  https://img.shields.io/scrutinizer/coverage/g/loophp/nanobench/master.svg?style=flat-square
+[code quality link]:
+  https://img.shields.io/scrutinizer/quality/g/loophp/nanobench/master.svg?style=flat-square
+[license]:
+  https://img.shields.io/packagist/l/loophp/nanobench.svg?style=flat-square
+[donate github]:
+  https://img.shields.io/badge/Sponsor-Github-brightgreen.svg?style=flat-square
 [github sponsor]: https://github.com/sponsors/drupol
-[donate paypal]: https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
+[donate paypal]:
+  https://img.shields.io/badge/Sponsor-Paypal-brightgreen.svg?style=flat-square
 [paypal sponsor]: https://www.paypal.me/drupol
 [phpspec]: http://www.phpspec.net/
 [grumphp]: https://github.com/phpro/grumphp
@@ -110,4 +124,5 @@ For more detailed changelogs, please check [the release changelogs][changelog-re
 [git-commits]: https://github.com/loophp/nanobench/commits/master
 [changelog-releases]: https://github.com/loophp/nanobench/releases
 [phpunit php-timer]: https://github.com/phpunit/php-timer
-[benchmark interface]: https://github.com/loophp/nanobench/blob/master/src/BenchmarkInterface.php
+[benchmark interface]:
+  https://github.com/loophp/nanobench/blob/master/src/BenchmarkInterface.php
