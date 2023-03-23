@@ -11,77 +11,65 @@ namespace loophp\nanobench;
 
 use Closure;
 use Generator;
-use loophp\nanobench\Time\StopwatchInterface;
-use loophp\nanobench\Time\TimeInterface;
 
 /**
- * @psalm-template T
+ * @template T
+ *
+ * @implements BenchmarkInterface<T>
  */
 final class Benchmark implements BenchmarkInterface
 {
     /**
-     * @psalm-var list<T>
+     * @var array<int, Analyzer>
      */
-    private array $arguments;
+    private array $analyzers;
 
-    /**
-     * @psalm-var Closure(T...): T
-     */
-    private Closure $closure;
-
-    /**
-     * @var mixed|null
-     * @psalm-var T|null
-     */
-    private $return;
-
-    private StopwatchInterface $stopwatch;
-
-    /**
-     * @psalm-param Closure(T...): T $closure
-     * @psalm-param T ...$arguments
-     */
-    public function __construct(StopwatchInterface $stopwatch, Closure $closure, ...$arguments)
+    public function __construct()
     {
-        $this->stopwatch = $stopwatch->reset();
-        $this->closure = $closure;
-        $this->arguments = $arguments;
+        $this->analyzers = [
+            new Analyzer\TotalDuration(),
+            new Analyzer\TotalMemory(),
+            new Analyzer\AverageDuration(),
+            new Analyzer\AverageMemory(),
+        ];
     }
 
-    public function getDuration(): TimeInterface
+    public function run(int $times, Closure $closure, mixed ...$arguments): array
     {
-        return $this->stopwatch->getDiffFromTo('start', 'stop');
+        $analyzers = array_map(
+            static fn (Analyzer $analyzer): Analyzer => $analyzer->start(),
+            $this->analyzers
+        );
+        $analyzersIndex = array_keys($analyzers);
+
+        foreach ($this->executeBench($analyzers, $times, $closure, $arguments) as $i => [$starts, ,$stops]) {
+            $analyzers = array_map(
+                static fn (Analyzer $analyzer, int $ai): Analyzer => $analyzer->withIterationResult($i, $starts[$ai], $stops[$ai]),
+                $analyzers,
+                $analyzersIndex
+            );
+        }
+
+        return array_map(
+            static fn (Analyzer $analyzer): Analyzer => $analyzer->withTotalIterations($times)->stop(),
+            $analyzers
+        );
     }
 
-    /**
-     * @return mixed|null
-     * @psalm-return T|null
-     */
-    public function getReturn()
+    private function executeBench(array $analyzers, int $times, Closure $closure, array $arguments): Generator
     {
-        return $this->return;
-    }
-
-    public function getStopwatch(): StopwatchInterface
-    {
-        return $this->stopwatch;
-    }
-
-    public function run(): BenchmarkInterface
-    {
-        [,$return,] = iterator_to_array($this->benchRunner());
-
-        $this->return = $return;
-
-        return $this;
-    }
-
-    private function benchRunner(): Generator
-    {
-        yield $this->stopwatch->start();
-
-        yield ($this->closure)(...$this->arguments);
-
-        yield $this->stopwatch->stop();
+        for ($i = 1; $i <= $times; ++$i) {
+            yield $i => [
+                array_map(
+                    static fn (Analyzer $analyzer): mixed => $analyzer->mark(),
+                    $analyzers
+                ),
+                ($closure)(...$arguments),
+                array_map(
+                    static fn (Analyzer $analyzer): mixed => $analyzer->mark(),
+                    $analyzers
+                ),
+            ];
+        }
     }
 }

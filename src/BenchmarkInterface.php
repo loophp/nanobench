@@ -9,19 +9,15 @@ declare(strict_types=1);
 
 namespace loophp\nanobench;
 
-use loophp\nanobench\Time\StopwatchInterface;
-use loophp\nanobench\Time\TimeInterface;
+use Closure;
 
+/**
+ * @template T
+ */
 interface BenchmarkInterface
 {
-    public function getDuration(): TimeInterface;
-
     /**
-     * @return mixed
+     * @param Closure(): T $closure
      */
-    public function getReturn();
-
-    public function getStopwatch(): StopwatchInterface;
-
-    public function run(): BenchmarkInterface;
+    public function run(int $times, Closure $closure, mixed ...$arguments): array;
 }

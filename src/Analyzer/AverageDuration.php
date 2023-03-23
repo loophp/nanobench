@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace loophp\nanobench\Analyzer;
+
+use DateInterval;
+use DateTimeInterface;
+use Lcobucci\Clock\SystemClock;
+use loophp\nanobench\Analyzer;
+use loophp\nanobench\DateIntervalHelper;
+use Psr\Clock\ClockInterface;
+
+final class AverageDuration extends AbstractAnalyzer
+{
+    private readonly ClockInterface $clock;
+
+    private DateInterval $interval;
+
+    public function __construct()
+    {
+        $this->interval = new DateInterval('PT0S');
+        $this->clock = SystemClock::fromSystemTimezone();
+    }
+
+    public function getResult(): DateInterval
+    {
+        return $this->interval;
+    }
+
+    public function mark(): DateTimeInterface
+    {
+        return $this->clock->now();
+    }
+
+    public function start(): Analyzer
+    {
+        return $this;
+    }
+
+    public function stop(): Analyzer
+    {
+        return $this;
+    }
+
+    public function withIterationResult(int $i, $start, $stop): static
+    {
+        $clone = clone $this;
+
+        $clone->interval = DateIntervalHelper::divide(
+            DateIntervalHelper::add(
+                DateIntervalHelper::multiply($this->interval, $i - 1),
+                $stop->diff($start)
+            ),
+            $i
+        );
+
+        return $clone;
+    }
+}
