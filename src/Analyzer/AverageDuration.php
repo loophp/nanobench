@@ -48,7 +48,7 @@ final class AverageDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result = null, null|DateTimeInterface|float $stop): static
     {
         $clone = clone $this;
 

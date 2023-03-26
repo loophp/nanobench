@@ -17,7 +17,9 @@ use Closure;
 interface BenchmarkInterface
 {
     /**
-     * @param Closure(): T $closure
+     * @param Closure(mixed...): T $closure
+     *
+     * @return array<int, Analyzer>
      */
     public function run(int $times, Closure $closure, mixed ...$arguments): array;
 }

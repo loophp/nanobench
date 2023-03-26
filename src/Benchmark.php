@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace loophp\nanobench;
 
 use Closure;
-use Generator;
 
 /**
  * @template T
@@ -37,15 +36,9 @@ final class Benchmark implements BenchmarkInterface
     public function run(int $times, Closure $closure, mixed ...$arguments): array
     {
         return array_map(
-            static fn (Analyzer $analyzer): Analyzer => $analyzer->withTotalIterations($times)->stop(),
+            static fn (Analyzer $analyzer): Analyzer => $analyzer->stop()->withTotalIterations($times),
             array_map(
-                function (Analyzer $analyzer) use ($times, $closure, $arguments): Analyzer {
-                    foreach ($this->executeBench($analyzer, $times, $closure, $arguments) as [$i, $start, ,$stop]) {
-                        $analyzer = $analyzer->withIterationResult($i, $start, $stop);
-                    }
-
-                    return $analyzer;
-                },
+                static fn (Analyzer $analyzer): Analyzer => $this->executeBench($analyzer, $times, $closure, $arguments),
                 array_map(
                     static fn (Analyzer $analyzer): Analyzer => $analyzer->start(),
                     $this->analyzers
@@ -54,15 +47,17 @@ final class Benchmark implements BenchmarkInterface
         );
     }
 
-    private function executeBench(Analyzer $analyzer, int $times, Closure $closure, array $arguments): Generator
+    private function executeBench(Analyzer $analyzer, int $times, Closure $closure, array $arguments): Analyzer
     {
         for ($i = 0; $i < $times; ++$i) {
-            yield [
+            $analyzer = $analyzer->withIterationResult(
                 $i,
                 $analyzer->mark(),
                 ($closure)(...$arguments),
-                $analyzer->mark(),
-            ];
+                $analyzer->mark()
+            );
         }
+
+        return $analyzer;
     }
 }

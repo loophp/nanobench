@@ -21,7 +21,7 @@ interface Analyzer
 
     public function stop(): Analyzer;
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, null|DateTimeInterface|float $stop): static;
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result = null, null|DateTimeInterface|float $stop): static;
 
     public function withTotalIterations(int $times): static;
 }
