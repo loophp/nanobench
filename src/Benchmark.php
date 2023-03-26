@@ -36,39 +36,32 @@ final class Benchmark implements BenchmarkInterface
 
     public function run(int $times, Closure $closure, mixed ...$arguments): array
     {
-        $analyzers = array_map(
-            static fn (Analyzer $analyzer): Analyzer => $analyzer->start(),
-            $this->analyzers
-        );
-        $analyzersIndex = array_keys($analyzers);
-
-        foreach ($this->executeBench($analyzers, $times, $closure, $arguments) as $i => [$starts, ,$stops]) {
-            $analyzers = array_map(
-                static fn (Analyzer $analyzer, int $ai): Analyzer => $analyzer->withIterationResult($i, $starts[$ai], $stops[$ai]),
-                $analyzers,
-                $analyzersIndex
-            );
-        }
-
         return array_map(
             static fn (Analyzer $analyzer): Analyzer => $analyzer->withTotalIterations($times)->stop(),
-            $analyzers
+            array_map(
+                function (Analyzer $analyzer) use ($times, $closure, $arguments): Analyzer {
+                    foreach ($this->executeBench($analyzer, $times, $closure, $arguments) as [$i, $start, ,$stop]) {
+                        $analyzer = $analyzer->withIterationResult($i, $start, $stop);
+                    }
+
+                    return $analyzer;
+                },
+                array_map(
+                    static fn (Analyzer $analyzer): Analyzer => $analyzer->start(),
+                    $this->analyzers
+                ),
+            )
         );
     }
 
-    private function executeBench(array $analyzers, int $times, Closure $closure, array $arguments): Generator
+    private function executeBench(Analyzer $analyzer, int $times, Closure $closure, array $arguments): Generator
     {
-        for ($i = 1; $i <= $times; ++$i) {
-            yield $i => [
-                array_map(
-                    static fn (Analyzer $analyzer): mixed => $analyzer->mark(),
-                    $analyzers
-                ),
+        for ($i = 0; $i < $times; ++$i) {
+            yield [
+                $i,
+                $analyzer->mark(),
                 ($closure)(...$arguments),
-                array_map(
-                    static fn (Analyzer $analyzer): mixed => $analyzer->mark(),
-                    $analyzers
-                ),
+                $analyzer->mark(),
             ];
         }
     }

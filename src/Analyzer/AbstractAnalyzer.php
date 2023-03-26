@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\nanobench\Analyzer;
 
+use DateTimeInterface;
 use loophp\nanobench\Analyzer;
 
 abstract class AbstractAnalyzer implements Analyzer
@@ -30,7 +31,7 @@ abstract class AbstractAnalyzer implements Analyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, $start, $stop): static
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, null|DateTimeInterface|float $stop): static
     {
         return clone $this;
     }

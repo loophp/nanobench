@@ -48,16 +48,16 @@ final class AverageDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, $start, $stop): static
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, null|DateTimeInterface|float $stop): static
     {
         $clone = clone $this;
 
         $clone->interval = DateIntervalHelper::divide(
             DateIntervalHelper::add(
-                DateIntervalHelper::multiply($this->interval, $i - 1),
+                DateIntervalHelper::multiply($this->interval, $i),
                 $stop->diff($start)
             ),
-            $i
+            $i + 1
         );
 
         return $clone;
