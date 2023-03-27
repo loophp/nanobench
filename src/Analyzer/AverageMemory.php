@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace loophp\nanobench\Analyzer;
 
-use DateTimeInterface;
 use loophp\nanobench\Analyzer;
 
 /**
@@ -42,7 +41,7 @@ final class AverageMemory extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
     {
         $clone = clone $this;
         $clone->memory = (($this->memory * $i) + ($stop - $start)) / ($i + 1);

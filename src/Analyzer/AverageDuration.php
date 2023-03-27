@@ -9,22 +9,19 @@ declare(strict_types=1);
 
 namespace loophp\nanobench\Analyzer;
 
-use DateInterval;
-use DateTimeInterface;
 use Lcobucci\Clock\SystemClock;
 use loophp\nanobench\Analyzer;
-use loophp\nanobench\DateIntervalHelper;
 use Psr\Clock\ClockInterface;
 
 final class AverageDuration extends AbstractAnalyzer
 {
     private readonly ClockInterface $clock;
 
-    private DateInterval $interval;
+    private float $interval;
 
     public function __construct()
     {
-        $this->interval = new DateInterval('PT0S');
+        $this->interval = 0.0;
         $this->clock = SystemClock::fromSystemTimezone();
     }
 
@@ -32,13 +29,13 @@ final class AverageDuration extends AbstractAnalyzer
     {
         return sprintf(
             'One iteration lasted %6f seconds in average.',
-            DateIntervalHelper::toSeconds($this->interval)
+            $this->interval
         );
     }
 
-    public function mark(): DateTimeInterface
+    public function mark(): float
     {
-        return $this->clock->now();
+        return (float) $this->clock->now()->format('U.u');
     }
 
     public function start(): Analyzer
@@ -51,17 +48,11 @@ final class AverageDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
     {
         $clone = clone $this;
 
-        $clone->interval = DateIntervalHelper::divide(
-            DateIntervalHelper::add(
-                DateIntervalHelper::multiply($this->interval, $i),
-                $stop->diff($start)
-            ),
-            $i + 1
-        );
+        $clone->interval = (($this->interval * $i) + ($stop - $start)) / ($i + 1);
 
         return $clone;
     }

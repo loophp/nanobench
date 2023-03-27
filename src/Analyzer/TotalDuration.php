@@ -55,7 +55,7 @@ final class TotalDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
     {
         $this->times = $i;
 

@@ -9,19 +9,17 @@ declare(strict_types=1);
 
 namespace loophp\nanobench;
 
-use DateTimeInterface;
-
 interface Analyzer
 {
     public function getResult(): mixed;
 
-    public function mark(): null|DateTimeInterface|float;
+    public function mark(): ?float;
 
     public function start(): Analyzer;
 
     public function stop(): Analyzer;
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static;
+    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static;
 
     public function withTotalIterations(int $times): static;
 }
