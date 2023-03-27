@@ -28,9 +28,12 @@ final class AverageDuration extends AbstractAnalyzer
         $this->clock = SystemClock::fromSystemTimezone();
     }
 
-    public function getResult(): DateInterval
+    public function getResult(): string
     {
-        return $this->interval;
+        return sprintf(
+            'One iteration lasted %6f seconds in average.',
+            DateIntervalHelper::toSeconds($this->interval)
+        );
     }
 
     public function mark(): DateTimeInterface
@@ -48,7 +51,7 @@ final class AverageDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result = null, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
     {
         $clone = clone $this;
 

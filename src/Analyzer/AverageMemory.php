@@ -21,7 +21,10 @@ final class AverageMemory extends AbstractAnalyzer
 
     public function getResult(): string
     {
-        return $this->convert($this->memory);
+        return sprintf(
+            'The benchmark took %s of average memory.',
+            $this->convert($this->memory)
+        );
     }
 
     public function mark(): float
@@ -39,7 +42,7 @@ final class AverageMemory extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result = null, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
     {
         $clone = clone $this;
         $clone->memory = (($this->memory * $i) + ($stop - $start)) / ($i + 1);

@@ -33,9 +33,7 @@ final class TotalDuration extends AbstractAnalyzer
     public function getResult(): string
     {
         return sprintf(
-            '
--------------------------------------------------------------------------------
-The benchmark started at %s, ended at %s. The %d iterations lasted %6f seconds.',
+            'The benchmark started at %s, ended at %s. The %d iterations lasted %6f seconds.',
             $this->start->format('h:i:s.u'),
             $this->stop->format('h:i:s.u'),
             $this->times,

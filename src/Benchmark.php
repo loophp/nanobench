@@ -36,7 +36,7 @@ final class Benchmark implements BenchmarkInterface
     public function run(int $times, Closure $closure, mixed ...$arguments): array
     {
         return array_map(
-            fn (Analyzer $analyzer): Analyzer => $this->executeBench($analyzer, $times, $closure, $arguments)->withTotalIterations($times),
+            fn (Analyzer $analyzer): Analyzer => $this->executeBench($analyzer, $times, $closure, $arguments),
             $this->analyzers
         );
     }
@@ -62,7 +62,7 @@ final class Benchmark implements BenchmarkInterface
             );
         }
 
-        return $analyzer->stop();
+        return $analyzer->stop()->withTotalIterations($times);
     }
 
     private function executeBenchFor(Analyzer $analyzer, float $seconds, Closure $closure, array $arguments): Analyzer
@@ -72,7 +72,7 @@ final class Benchmark implements BenchmarkInterface
 
         $analyzer = $analyzer->start();
 
-        while (microtime(true) - $start < $seconds) {
+        while (microtime(true) - $start <= $seconds) {
             $analyzer = $analyzer->withIterationResult(
                 $times++,
                 $analyzer->mark(),
@@ -81,6 +81,6 @@ final class Benchmark implements BenchmarkInterface
             );
         }
 
-        return $analyzer->stop();
+        return $analyzer->stop()->withTotalIterations($times);
     }
 }

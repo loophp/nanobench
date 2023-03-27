@@ -31,7 +31,7 @@ abstract class AbstractAnalyzer implements Analyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result = null, null|DateTimeInterface|float $stop): static
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
     {
         return clone $this;
     }
