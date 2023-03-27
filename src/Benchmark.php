@@ -36,19 +36,15 @@ final class Benchmark implements BenchmarkInterface
     public function run(int $times, Closure $closure, mixed ...$arguments): array
     {
         return array_map(
-            static fn (Analyzer $analyzer): Analyzer => $analyzer->stop()->withTotalIterations($times),
-            array_map(
-                static fn (Analyzer $analyzer): Analyzer => $this->executeBench($analyzer, $times, $closure, $arguments),
-                array_map(
-                    static fn (Analyzer $analyzer): Analyzer => $analyzer->start(),
-                    $this->analyzers
-                ),
-            )
+            fn (Analyzer $analyzer): Analyzer => $this->executeBench($analyzer, $times, $closure, $arguments)->withTotalIterations($times),
+            $this->analyzers
         );
     }
 
     private function executeBench(Analyzer $analyzer, int $times, Closure $closure, array $arguments): Analyzer
     {
+        $analyzer = $analyzer->start();
+
         for ($i = 0; $i < $times; ++$i) {
             $analyzer = $analyzer->withIterationResult(
                 $i,
@@ -58,6 +54,6 @@ final class Benchmark implements BenchmarkInterface
             );
         }
 
-        return $analyzer;
+        return $analyzer->stop();
     }
 }
