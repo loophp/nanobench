@@ -56,4 +56,11 @@ The benchmark started at %s, ended at %s. The %d iterations lasted %6f seconds.'
 
         return $this;
     }
+
+    public function withIterationResult(int $i, null|DateTimeInterface|float $start, mixed $result, null|DateTimeInterface|float $stop): static
+    {
+        $this->times = $i;
+
+        return $this;
+    }
 }
