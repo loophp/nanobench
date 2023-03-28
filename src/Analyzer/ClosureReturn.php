@@ -4,34 +4,33 @@ declare(strict_types=1);
 
 namespace loophp\nanobench\Analyzer;
 
-use Exception;
+use function count;
 
 final class ClosureReturn extends AbstractAnalyzer
 {
-    private mixed $return;
+    private bool $consistency = true;
+
+    private array $returns = [];
 
     public function getResult(): string
     {
         return sprintf(
-            'The Closure return (%s) was consistent across the %s iterations.',
-            $this->return,
-            $this->times
+            'The Closure return (%s) was %sconsistent during the benchmark.',
+            current($this->returns),
+            $this->consistency ? '' : 'not '
         );
     }
 
     public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
     {
-        if (!isset($this->return)) {
-            $clone = clone $this;
-            $clone->return = $result;
+        $clone = clone $this;
+        $clone->returns[] = $result;
 
-            return $clone;
+        if (3 === count($clone->returns)) {
+            $clone->returns = [$clone->returns[1], $clone->returns[2]];
+            $clone->consistency = $clone->consistency && ($clone->returns[0] === $clone->returns[1]);
         }
 
-        if ($this->return !== $result) {
-            throw new Exception('Result different');
-        }
-
-        return $this;
+        return $clone;
     }
 }

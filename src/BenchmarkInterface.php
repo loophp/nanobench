@@ -16,5 +16,5 @@ interface BenchmarkInterface
      *
      * @return array<int, Analyzer>
      */
-    public function run(int $times, Closure $closure, mixed ...$arguments): array;
+    public function run(int|float $parameter, Closure $closure, mixed ...$arguments): array;
 }

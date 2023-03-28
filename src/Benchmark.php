@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace loophp\nanobench;
 
 use Closure;
-use loophp\nanobench\Executor\IterationBased;
+use loophp\nanobench\Executor\Iteration;
 
 /**
  * @template T
@@ -18,15 +18,15 @@ final class Benchmark implements BenchmarkInterface
     {
     }
 
-    public function run(int $times, Closure $closure, mixed ...$arguments): array
+    public function run(int|float $parameter, Closure $closure, mixed ...$arguments): array
     {
-        return $this->executor->run($this->analyzers, $times, $closure, $arguments);
+        return $this->executor->run($this->analyzers, $parameter, $closure, $arguments);
     }
 
     public static function withDefault(string $executor = '', array $analyzers = []): self
     {
         return new self(
-            '' !== $executor ? new $executor() : new IterationBased(),
+            '' !== $executor ? new $executor() : new Iteration(),
             [] !== $analyzers ? $analyzers : [
                 new Analyzer\TotalDuration(),
                 new Analyzer\TotalMemory(),

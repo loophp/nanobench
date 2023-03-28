@@ -8,7 +8,7 @@ use Closure;
 use loophp\nanobench\Analyzer;
 use loophp\nanobench\Executor;
 
-final class TimeBased implements Executor
+final class Iteration implements Executor
 {
     public function run(array $analyzers, mixed $parameter, Closure $closure, array $arguments): array
     {
@@ -18,16 +18,13 @@ final class TimeBased implements Executor
         );
     }
 
-    private function executeBench(Analyzer $analyzer, float $seconds, Closure $closure, array $arguments): Analyzer
+    private function executeBench(Analyzer $analyzer, int $times, Closure $closure, array $arguments): Analyzer
     {
-        $times = 0;
-        $start = microtime(true);
-
         $analyzer = $analyzer->start();
 
-        while (microtime(true) - $start <= $seconds) {
+        for ($i = 0; $i < $times; ++$i) {
             $analyzer = $analyzer->withIterationResult(
-                $times++,
+                $i,
                 $analyzer->mark(),
                 ($closure)(...$arguments),
                 $analyzer->mark()
