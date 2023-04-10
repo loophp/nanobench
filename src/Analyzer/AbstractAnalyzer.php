@@ -25,16 +25,8 @@ abstract class AbstractAnalyzer implements Analyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
+    public function withIterationResult(?float $start, mixed $result, ?float $stop): static
     {
         return clone $this;
-    }
-
-    public function withTotalIterations(int $times): static
-    {
-        $clone = clone $this;
-        $clone->times = $times;
-
-        return $clone;
     }
 }

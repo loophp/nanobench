@@ -13,6 +13,8 @@ final class AverageMemory extends AbstractAnalyzer
 {
     private float $memory = 0.0;
 
+    private int $i = 0;
+
     public function getResult(): string
     {
         return sprintf(
@@ -36,10 +38,11 @@ final class AverageMemory extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
+    public function withIterationResult(?float $start, mixed $result, ?float $stop): static
     {
         $clone = clone $this;
-        $clone->memory = (($this->memory * $i) + ($stop - $start)) / ($i + 1);
+        $clone->memory = (($this->memory * $clone->i) + ($stop - $start)) / ($clone->i + 1);
+        $clone->i++;
 
         return $clone;
     }

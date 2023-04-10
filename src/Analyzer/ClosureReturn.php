@@ -15,13 +15,12 @@ final class ClosureReturn extends AbstractAnalyzer
     public function getResult(): string
     {
         return sprintf(
-            'The Closure return (%s) was %sconsistent during the benchmark.',
-            current($this->returns),
+            'The Closure return value was %sconsistent during the benchmark.',
             $this->consistency ? '' : 'not '
         );
     }
 
-    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
+    public function withIterationResult(?float $start, mixed $result, ?float $stop): static
     {
         $clone = clone $this;
         $clone->returns[] = $result;

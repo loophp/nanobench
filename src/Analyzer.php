@@ -14,7 +14,5 @@ interface Analyzer
 
     public function stop(): Analyzer;
 
-    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static;
-
-    public function withTotalIterations(int $times): static;
+    public function withIterationResult(?float $start, mixed $result, ?float $stop): static;
 }

@@ -24,13 +24,12 @@ final class Iteration implements Executor
 
         for ($i = 0; $i < $times; ++$i) {
             $analyzer = $analyzer->withIterationResult(
-                $i,
                 $analyzer->mark(),
                 ($closure)(...$arguments),
                 $analyzer->mark()
             );
         }
 
-        return $analyzer->stop()->withTotalIterations($times);
+        return $analyzer->stop();
     }
 }

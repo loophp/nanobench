@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace loophp\nanobench\Analyzer;
 
-use Lcobucci\Clock\SystemClock;
 use loophp\nanobench\Analyzer;
 use Psr\Clock\ClockInterface;
 
 final class AverageDuration extends AbstractAnalyzer
 {
-    private readonly ClockInterface $clock;
+    private float $interval = 0.0;
 
-    private float $interval;
+    private int $i = 0;
 
-    public function __construct()
-    {
-        $this->interval = 0.0;
-        $this->clock = SystemClock::fromSystemTimezone();
+    public function __construct(
+        private readonly ClockInterface $clock
+    ) {
     }
 
     public function getResult(): string
@@ -43,11 +41,12 @@ final class AverageDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
+    public function withIterationResult(?float $start, mixed $result, ?float $stop): static
     {
         $clone = clone $this;
 
-        $clone->interval = (($this->interval * $i) + ($stop - $start)) / ($i + 1);
+        $clone->interval = (($this->interval * $clone->i) + ($stop - $start)) / ($clone->i + 1);
+        $clone->i++;
 
         return $clone;
     }

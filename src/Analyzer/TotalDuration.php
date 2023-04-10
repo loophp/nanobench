@@ -13,16 +13,14 @@ use Psr\Clock\ClockInterface;
 
 final class TotalDuration extends AbstractAnalyzer
 {
-    private readonly ClockInterface $clock;
-
     private DateTimeInterface $start;
 
     private DateTimeInterface $stop;
 
-    public function __construct()
-    {
-        $this->clock = new SystemClock(new DateTimeZone('Europe/Brussels'));
-        $this->start = $this->stop = $this->clock->now();
+    public function __construct(
+        private readonly ClockInterface $clock,
+    ) {
+        $this->start = $this->stop = $clock->now();
     }
 
     public function getResult(): string
@@ -50,9 +48,9 @@ final class TotalDuration extends AbstractAnalyzer
         return $this;
     }
 
-    public function withIterationResult(int $i, ?float $start, mixed $result, ?float $stop): static
+    public function withIterationResult(?float $start, mixed $result, ?float $stop): static
     {
-        $this->times = $i;
+        $this->times++;
 
         return $this;
     }

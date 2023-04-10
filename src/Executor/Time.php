@@ -20,20 +20,18 @@ final class Time implements Executor
 
     private function executeBench(Analyzer $analyzer, float $seconds, Closure $closure, array $arguments): Analyzer
     {
-        $times = 0;
         $start = microtime(true);
 
         $analyzer = $analyzer->start();
 
         while (microtime(true) - $start <= $seconds) {
             $analyzer = $analyzer->withIterationResult(
-                $times++,
                 $analyzer->mark(),
                 ($closure)(...$arguments),
                 $analyzer->mark()
             );
         }
 
-        return $analyzer->stop()->withTotalIterations($times);
+        return $analyzer->stop();
     }
 }
