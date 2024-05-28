@@ -30,7 +30,7 @@
         "ext-pcov": "*",
         "drupol/php-conventions": "^5",
         "friends-of-phpspec/phpspec-code-coverage": "^6",
-        "infection/infection": "^0.26",
+        "infection/infection": "^0.29",
         "infection/phpspec-adapter": "^0.2.0",
         "phpspec/phpspec": "^7",
         "phpstan/phpstan-strict-rules": "^0.12 || ^1.0"
